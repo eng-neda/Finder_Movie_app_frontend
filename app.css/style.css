@@ -1,0 +1,73 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+body {
+  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6; */
+  background-color: #000;
+}
+/* Container */
+.container {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.main {
+  width: 100%;
+  height: 100vh;
+  background: url(../picture/DUNE.jpg) no-repeat center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  padding: 100px 80px;
+}
+.main h1 {
+  font-size: 50px;
+  color: white;
+  margin-top: 100px;
+}
+.button {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.button span {
+  border: 1px solid white;
+  border-radius: 50px;
+  padding: 9px 15px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.button span a {
+  color: white;
+  font-size: 16px;
+}
+.button span:hover {
+  background-color: #000;
+}
+.main p {
+  color: white;
+  font-size: 18px;
+}
+.main span {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  margin-top: 20px;
+}
