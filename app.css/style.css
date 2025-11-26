@@ -12,10 +12,17 @@ li {
 a {
   text-decoration: none;
 }
+@font-face {
+  font-family: "inter";
+  src: url(../fonts/static/Inter_18pt-Regular.ttf);
+}
+@font-face {
+  font-family: "inter1";
+  src: url(../fonts/static/Inter_18pt-Bold.ttf);
+}
 
 body {
-  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6; */
+  font-family: "inter";
   background-color: #000;
 }
 /* Container */
@@ -23,6 +30,44 @@ body {
   max-width: 95%;
   margin: 0 auto;
   padding: 0 10px;
+}
+/* HEADER */
+.header {
+  width: 100%;
+  height: 84px;
+  margin: 1px 65px;
+  display: flex;
+  padding: 0px 50px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+/* HEADER..LOGO */
+.logo {
+  width: 20%;
+}
+.logo img {
+  display: block;
+  width: 50%;
+}
+/* HEADER...SEARCH-BOX */
+.search-box {
+  width: 60%;
+  height: 100%;
+  margin: 15px;
+}
+.search-box input {
+  width: 100%;
+  height: 50%;
+  font-size: 15px;
+  padding: 10px;
+  background-color: #000;
+  color: aliceblue;
+  border-radius: 10px;
+}
+/* HEADER...MENU */
+.menu {
+  width: 20%;
 }
 
 .main {
@@ -37,7 +82,8 @@ body {
   padding: 100px 80px;
 }
 .main h1 {
-  font-size: 50px;
+  font-family: "inter1";
+  font-size: 48px;
   color: white;
   margin-top: 100px;
 }
@@ -45,28 +91,29 @@ body {
   width: 200px;
   display: flex;
   justify-content: space-between;
-  gap: 15px;
+  gap: 10px;
 }
 .button span {
-  border: 1px solid white;
-  border-radius: 50px;
-  padding: 9px 15px;
+  border: 0.5px solid white;
+  border-radius: 20px;
+  padding: 8px 16px;
   margin-top: 15px;
   margin-bottom: 20px;
 }
 .button span a {
   color: white;
-  font-size: 16px;
+  font-size: 14px;
 }
 .button span:hover {
   background-color: #000;
+  transition: 1s;
 }
 .main p {
   color: white;
-  font-size: 18px;
+  font-size: 16px;
 }
 .main span {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: white;
   margin-top: 20px;
