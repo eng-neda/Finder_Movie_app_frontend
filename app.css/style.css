@@ -223,7 +223,6 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 24px;
   padding: 0;
-  /* margin-top: 10px; */
 }
 
 .movie-items li {
@@ -316,7 +315,7 @@ footer {
   border: none;
   background-color: #ffd900;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 50px;
   font-size: 14px;
   transition: 0.2s;
 }
