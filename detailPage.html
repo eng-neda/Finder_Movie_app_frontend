@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dune Part 2 - Movie Details</title>
+    <link rel="icon" href="picture/imdb.icon.png" />
+    <link rel="stylesheet" href="app.css/detailPage.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo">
+        <a href="homePage.html">
+          <img src="picture/imbd.png" />
+        </a>
+      </div>
+      <div class="search-box">
+        <input type="search" placeholder="Search IMDb" id="searchInput" />
+      </div>
+      <!--HEADER hamburger menu -->
+      <div class="hamburger">
+        <ul>
+          <li class="dropdown">
+            <a href="#" class="drop-btn">
+              Genres <span class="icon-circle-down"></span>
+            </a>
+            <ul class="hamburger2">
+              <li><a href="genre.html?genre=action">Action</a></li>
+              <li><a href="genre.html?genre=adventure">Adventure</a></li>
+              <li><a href="genre.html?genre=animation">Animation</a></li>
+              <li><a href="genre.html?genre=biography">Biography</a></li>
+              <li><a href="genre.html?genre=comedy">Comedy</a></li>
+              <li><a href="genre.html?genre=crime">Crime</a></li>
+              <li><a href="genre.html?genre=drama">Drama</a></li>
+              <li><a href="genre.html?genre=fantasy">Fantasy</a></li>
+              <li><a href="genre.html?genre=horror">Horror</a></li>
+              <li><a href="genre.html?genre=sci-fi">Sci-Fi</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <!-- Movie Title Section -->
+      <div class="title-movie">
+        <div class="part1">
+          <h2>Dune: Part Two</h2>
+          <span>2024 • PG-13 • 2h 46m</span>
+        </div>
+        <div class="rank">
+          ⭐ 8.0/10
+          <span style="color: #999; font-size: 16px">(IMDb Rating)</span>
+        </div>
+      </div>
+
+      <!-- Movie Details -->
+      <div class="movie-details-content">
+        <div class="movie-poster">
+          <img
+            src="https://m.media-amazon.com/images/M/MV5BN2QyZGU4ZDctOWMzMy00NTc5LThlOGQtODhmNDI1NmY5YzAwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_FMjpg_UX1000_.jpg"
+            alt="Dune: Part Two Poster"
+          />
+        </div>
+
+        <div class="movie-info">
+          <div class="details-grid">
+            <div class="detail-item">
+              <h4>Genres</h4>
+              <p>Action, Adventure, Drama</p>
+            </div>
+            <div class="detail-item">
+              <h4>Plot</h4>
+              <p>
+                Paul Atreides unites with Chani and the Fremen while seeking
+              </p>
+            </div>
+            <div class="detail-item">
+              <h4>Director</h4>
+              <p>Denis Villeneuve</p>
+            </div>
+            <div class="detail-item">
+              <h4>Writers</h4>
+              <p>Denis Villeneuve, Jon Spaihts, Frank Herbert</p>
+            </div>
+            <div class="detail-item">
+              <h4>Stars</h4>
+              <p>Timothée Chalamet, Zendaya, Rebecca Ferguson</p>
+            </div>
+          </div>
+          <div class="image-container">
+            <img src="picture/1.jpg" />
+            <img src="picture/wolf.jpg" />
+            <img src="picture/3.jpg" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Cast Section -->
+      <div class="cast-section">
+        <h3>.Cast</h3>
+        <div class="cast-grid">
+          <div class="cast-member">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BOWYzYzMzMjAtMDgwMC00ZjAwLTk5NmItN2Q5Mjg1Y2U2M2QwXkEyXkFqcGdeQXVyMjQwMDg0Ng@@._V1_.jpg"
+              alt="Timothée Chalamet"
+            />
+            <h4>Timothée Chalamet</h4>
+            <p>Paul Atreides</p>
+          </div>
+          <div class="cast-member">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMTUwMjk0NjgzMF5BMl5BanBnXkFtZTgwNzY5OTM5MDI@._V1_.jpg"
+              alt="Zendaya"
+            />
+            <h4>Zendaya</h4>
+            <p>Chani</p>
+          </div>
+          <div class="cast-member">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMjE2ODQ2MDc2N15BMl5BanBnXkFtZTgwNzQ2Mjk1NjM@._V1_.jpg"
+              alt="Rebecca Ferguson"
+            />
+            <h4>Rebecca Ferguson</h4>
+            <p>Lady Jessica</p>
+          </div>
+          <div class="cast-member">
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMTQzMjkwOTQzMV5BMl5BanBnXkFtZTgwNzc1NTg0MzE@._V1_.jpg"
+              alt="Josh Brolin"
+            />
+            <h4>Josh Brolin</h4>
+            <p>Gurney Halleck</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back Button -->
+      <a href="homePage.html" class="back-button">← Back to Home</a>
+    </div>
+    <!-- FOOTER -->
+    <footer class="main-footer">
+      <div class="footer-content">
+        <p>&copy; 2025 by Karyar Studio</p>
+      </div>
+    </footer>
+
+    <script src="script.js/detailPage.js"></script>
+  </body>
+</html>
