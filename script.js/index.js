@@ -33,14 +33,15 @@ const nextBtn = document.getElementById("nextBtn");
 
 // مقدار دهی اولیه
 let currentPage = 1;
-let currentSearch = "batman";
+let currentSearch = "dune";
 let totalPages = 1;
 
 // -------------------------
 // درخواست API برای سرچ
 // -------------------------
 async function fetchMovies(search, page) {
-  movieContainer.innerHTML = "<h2>Loading...</h2>";
+  const loadingOverlay = document.getElementById("loadingOverlay");
+  loadingOverlay.style.display = "flex"; // نمایش لودینگ
 
   try {
     const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}&page=${page}`;
@@ -52,24 +53,35 @@ async function fetchMovies(search, page) {
       return;
     }
 
-    totalPages = Math.ceil(data.totalResults / 10);
+    totalPages = Math.ceil(data.totalResults / 20);
     renderMovies(data.Search);
     renderPagination();
   } catch (err) {
     movieContainer.innerHTML = "<h2>Error loading data</h2>";
+    console.error(err); // برای اشکال‌زدایی
+  } finally {
+    loadingOverlay.style.display = "none"; // مخفی کردن لودینگ حتی اگر خطا رخ دهد
   }
 }
 
 // -------------------------
 // نمایش فیلم‌ها
 // -------------------------
-function renderMovies(movies) {
+async function renderMovies(movies) {
   movieContainer.innerHTML = "";
 
   const ul = document.createElement("ul");
   ul.classList.add("movie-items");
 
-  movies.forEach((movie) => {
+  for (const movie of movies) {
+    // گرفتن جزئیات کامل فیلم
+    const url = `https://www.omdbapi.com/?apikey=${API_KEY}&i=${movie.imdbID}`;
+    const res = await fetch(url);
+    const details = await res.json();
+
+    const rating = details.imdbRating !== "N/A" ? details.imdbRating : "—";
+    const genre = details.Genre !== "N/A" ? details.Genre : "Unknown";
+
     const li = document.createElement("li");
     li.innerHTML = `
       <div class="photo">
@@ -79,24 +91,22 @@ function renderMovies(movies) {
       </div>
       <div class="movie-info">
         <h3>${movie.Title}</h3>
-        <p>${movie.Year}</p>
+        <p>${genre}</p>
         <div class="rank">
-          <span>⭐</span>
+          <span>⭐ ${rating}</span>
           <button class="view-btn" onclick="viewDetails('${
             movie.imdbID
           }')">View Info</button>
         </div>
       </div>
     `;
+
     ul.appendChild(li);
-  });
+  }
 
   movieContainer.appendChild(ul);
 }
 
-// -------------------------
-// Pagination نمایش
-// -------------------------
 function renderPagination() {
   pageNumbers.innerHTML = "";
 
@@ -155,7 +165,7 @@ searchInput.addEventListener("keydown", (e) => {
 // رفتن به صفحه جزئیات
 // -------------------------
 function viewDetails(id) {
-  window.location.href = `movieDetails.html?id=${id}`;
+  window.location.href = `detailPage.html?id=${id}`;
 }
 
 // -------------------------

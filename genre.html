@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genre - Movie Finder</title>
+    <link rel="icon" href="picture/imdb.icon.png" />
+    <link rel="stylesheet" href="app.css/index.css" />
+  </head>
+  <body>
+    <!-- Header (مشابه index.html) -->
+    <header class="header">
+      <div class="logo">
+        <a href="index.html">
+          <img src="picture/imbd.png" alt="Movie Finder" />
+        </a>
+      </div>
+      <div class="search-box">
+        <input
+          type="search"
+          placeholder="Search for movies..."
+          id="searchInput"
+        />
+      </div>
+      <div class="hamburger">
+        <ul>
+          <li class="dropdown">
+            <a href="#" class="drop-btn">
+              Genres <span class="icon-circle-down"></span>
+            </a>
+            <ul class="hamburger2">
+              <!-- لیست ژانرها -->
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="container">
+      <h1 id="genre-title" class="page-title">Action Movies</h1>
+      <div id="movies-container" class="movies-grid">
+        <!-- فیلم‌ها اینجا لود می‌شوند -->
+      </div>
+      <div id="pagination" class="pagination"></div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-content">
+        <p>&copy; 2025 by Karyar Studio</p>
+      </div>
+    </footer>
+
+    <script src="script.js/genre.js"></script>
+  </body>
+</html>
