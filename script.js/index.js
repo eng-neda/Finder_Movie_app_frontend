@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       totalPages = Math.min(500, data.total_pages);
 
-      renderMovies(data.results.slice(0, 20)); // ⬅ فقط 20 فیلم
+      renderMovies(data.results.slice(0, 20));
       renderPagination();
     } catch (err) {
       movieContainer.innerHTML =
