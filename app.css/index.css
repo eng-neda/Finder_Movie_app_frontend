@@ -69,20 +69,23 @@ body {
   width: 85%;
   margin: 0 auto;
 }
-
 /* HEADER */
 .header {
   width: 100%;
   height: 84px;
   display: flex;
-  padding: 20px 80px;
+  padding: 20px 60px;
   position: absolute;
   left: 0;
   top: 0;
+  margin: 5px 50px;
+  z-index: 100;
 }
+
 /* HEADER..LOGO */
 .logo {
   width: 20%;
+  padding-top: 5px;
 }
 
 .logo img {
@@ -93,23 +96,30 @@ body {
 
 /* HEADER...SEARCH-BOX */
 .search-box {
-  width: 75%;
+  width: 60%;
   padding: 12px 20px;
 }
+
 .search-box input {
   width: 100%;
   height: 48px;
   font-size: 15px;
   padding: 10px;
-  background-color: #000;
+  background-color: #333;
   color: white;
+  border: 1px solid #555;
   border-radius: 10px;
+  outline: none;
 }
+.search-box input:focus {
+  border-color: #f5c518;
+}
+
 /* HEADER...MENU-HUMBERGER */
 .hamburger {
   width: 20%;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px;
   position: relative;
 }
 
@@ -119,43 +129,59 @@ body {
   position: relative;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #333;
+  border-radius: 5px;
+}
+
+.dropdown {
+  position: relative;
 }
 
 .hamburger2 {
   position: absolute;
   top: 100%;
-  left: 70px;
-  width: max-content;
-  max-height: 300px;
-  overflow-y: hidden;
+  left: 55px;
+  width: 150px;
   max-height: 0;
-  background-color: rgba(24, 24, 24, 1);
-  border: 0.5px solid black;
+  background-color: #181818;
+  border: 1px solid #333;
   border-radius: 10px;
-  padding: 0 20px;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  text-align: left;
-  gap: 20px;
-  transition: 0.3s;
-  margin-top: 10px;
+  align-items: flex-start;
+  gap: 0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  z-index: 1001;
 }
 
 .hamburger2.active {
-  max-height: 300px;
-  padding: 20px;
-  font-size: 14px;
+  max-height: 400px;
+  padding: 15px 0;
   overflow-y: auto;
+}
+
+.hamburger2 li {
+  padding: 10px 20px;
 }
 
 .hamburger2 li a {
   color: white;
   font-size: 16px;
   text-decoration: none;
+  display: block;
+  transition: color 0.3s;
+}
+
+.hamburger2 li a:hover {
+  color: #f5c518;
 }
 
 .hamburger2::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 .hamburger2::-webkit-scrollbar-track {
@@ -164,60 +190,114 @@ body {
 }
 
 .hamburger2::-webkit-scrollbar-thumb {
-  background: black;
+  background: #555;
   border-radius: 10px;
 }
+/* HERO SLIDER */
 .main {
+  position: relative;
   width: 100%;
-  height: 100vh;
-  background: url(../picture/hero.jpg) no-repeat 1px -10px;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: left;
-  padding: 100px 80px;
-  margin-bottom: 50px;
-}
-.main h1 {
-  font-family: "inter1";
-  font-size: 48px;
-  color: white;
-  margin-top: 100px;
-}
-.button {
-  width: 200px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-.button span {
-  border: 0.5px solid white;
-  border-radius: 20px;
-  padding: 8px 16px;
-  margin-top: 15px;
+  height: 90vh;
+  overflow: hidden;
+  border-radius: 1px;
   margin-bottom: 20px;
 }
-.button span a {
+
+/* هر اسلاید */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* اسلاید فعال */
+.slide.active {
+  opacity: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* اطلاعات روی اسلاید (ژانر، پلات ...) */
+.hero-info {
+  position: absolute;
+  bottom: 80px;
+  left: 70px;
+  color: #fff;
+  max-width: 40%;
+}
+.movie-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
   color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+}
+
+/* ژانرها */
+.genres span {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 16px;
+  margin-right: 6px;
+  margin-bottom: 8px;
   font-size: 14px;
 }
-.button span:hover {
-  background-color: #000;
-  transition: 1s;
-}
-.main p {
-  color: white;
-  font-size: 16px;
-}
-.main span {
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  margin-top: 20px;
-}
-/* MOVIE-ITEMS  */
 
+.genres span a {
+  color: white;
+  text-decoration: none;
+}
+
+/* پلات */
+.hero-info p {
+  margin-top: 15px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e3e3e3;
+}
+
+/* تاریخ انتشار */
+.hero-info span {
+  display: inline-block;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+}
+.genres span:hover {
+  background-color: #000;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .hero-info {
+    left: 25px;
+    bottom: 50px;
+    max-width: 80%;
+  }
+
+  .hero-info p {
+    font-size: 14px;
+  }
+
+  .genres span {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}
+
+/* MOVIE-ITEMS  */
 .movie-items {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -292,53 +372,6 @@ body {
 }
 
 /* FOOTER */
-footer {
-  width: 100%;
-  height: 156px;
-  margin: 0 auto;
-  padding: 70px 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.pagination button {
-  padding: 8px 14px;
-  border: none;
-  background-color: #ffd900;
-  cursor: pointer;
-  border-radius: 50px;
-  font-size: 14px;
-  transition: 0.2s;
-}
-
-.pagination button:hover {
-  background-color: #ffea70;
-}
-
-#pageNumbers button {
-  margin: 0 3px;
-  padding: 6px 10px;
-  border: none;
-  background-color: #eee;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-#pageNumbers .active {
-  background-color: #ffd900;
-  font-weight: bold;
-}
-
-/* FOOTER */
 .main-footer {
   background-color: #000;
   color: #fff;
@@ -348,7 +381,74 @@ footer {
   margin-top: 50px;
 }
 
-/* overlay برای لودینگ */
+/* PAGINATION  */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 0;
+  gap: 8px; /* فاصله بین آیتم‌ها */
+}
+
+/* دکمه‌های فلش */
+.arrow-btn {
+  background: #111;
+  color: white;
+  padding: 10px 14px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.arrow-btn:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+/* کانتینر شماره صفحات */
+#pageNumbers {
+  display: flex;
+  margin: 20px 10px;
+  gap: 20px; /* فاصله بین اعداد */
+}
+
+/* هر عدد صفحه */
+.page-btn {
+  padding: 8px 14px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: rgba(188, 188, 188, 1);
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+/* عدد صفحه فعال */
+.page-btn.active {
+  background: #ffcc00;
+  color: #000;
+  font-size: 18px;
+}
+
+/* هاور عدد صفحه */
+.page-btn:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+/* سه نقطه */
+.ellipsis {
+  color: #777;
+  padding: 5px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+/* overlay  */
 .loading-overlay {
   position: fixed;
   top: 0;

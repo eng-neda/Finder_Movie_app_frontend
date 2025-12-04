@@ -146,8 +146,8 @@ body {
 .hamburger2 {
   position: absolute;
   top: 100%;
-  left: 0;
-  width: 200px;
+  left: 50px;
+  width: 150px;
   max-height: 0;
   background-color: #181818;
   border: 1px solid #333;
@@ -155,6 +155,7 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0;
   transition: all 0.3s ease;
   overflow: hidden;
@@ -184,7 +185,7 @@ body {
 }
 
 .hamburger2::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 .hamburger2::-webkit-scrollbar-track {
