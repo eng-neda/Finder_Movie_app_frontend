@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finder-Movie</title>
     <link rel="icon" href="picture/imdb.icon.png" />
-    <link rel="stylesheet" href="app.css/index.css" />
+    <link rel="stylesheet" href="app.css/search.css" />
   </head>
 
   <body>
@@ -54,41 +54,12 @@
       </div>
     </header>
 
-    <!-- HERO -->
-    <div class="main">
-      <div class="slide active">
-        <img id="slide-img-1" />
-        <div class="hero-info">
-          <h1 id="title-1" class="movie-title"></h1>
-          <div class="genres" id="genre-1"></div>
-          <p id="plot-1"></p>
-          <span id="released-1"></span>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img id="slide-img-2" />
-        <div class="hero-info">
-          <h1 id="title-2" class="movie-title"></h1>
-          <div class="genres" id="genre-2"></div>
-          <p id="plot-2"></p>
-          <span id="released-2"></span>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img id="slide-img-3" />
-        <div class="hero-info">
-          <h1 id="title-3" class="movie-title"></h1>
-          <div class="genres" id="genre-3"></div>
-          <p id="plot-3"></p>
-          <span id="released-3"></span>
-        </div>
-      </div>
-    </div>
-
     <!-- MOVIE-ITEMS -->
     <div class="container">
+      <div class="title">
+        <h2><span id="searchTerm"></span></h2>
+      </div>
+
       <ul class="movie-items"></ul>
     </div>
 
@@ -111,6 +82,6 @@
       </div>
     </footer>
 
-    <script src="script.js/index.js"></script>
+    <script src="script.js/search.js"></script>
   </body>
 </html>

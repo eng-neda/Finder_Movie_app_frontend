@@ -118,6 +118,25 @@ body {
 .search-box input:focus {
   border-color: #f5c518;
 }
+/* SEARCH-SUGGESTION */
+.search-suggestions {
+  position: absolute;
+  background: #222;
+  width: 48%;
+  color: white;
+  margin-top: 5px;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.suggest-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggest-item:hover {
+  background: #444;
+}
 
 /* HEADER...MENU-HUMBERGER */
 .hamburger {

@@ -16,9 +16,10 @@ a {
   font-family: "inter";
   src: url(../fonts/static/Inter_18pt-Regular.ttf);
 }
+
 @font-face {
-  font-family: "inter1";
-  src: url(../fonts/static/Inter_18pt-Bold.ttf);
+  font-family: "inter.thin";
+  src: url(../fonts/static/Inter_18pt-Thin.ttf);
 }
 @font-face {
   font-family: "icomoon";
@@ -75,7 +76,7 @@ body {
   height: 84px;
   display: flex;
   padding: 20px 60px;
-  position: absolute;
+  position: relative;
   left: 0;
   top: 0;
   margin: 5px 50px;
@@ -192,116 +193,20 @@ body {
   background: #555;
   border-radius: 10px;
 }
-/* HERO SLIDER */
-.main {
-  position: relative;
-  width: 100%;
-  height: 90vh;
-  overflow: hidden;
-  border-radius: 1px;
-  margin-bottom: 20px;
+.title {
+  margin: 50px 10px;
 }
-
-/* هر اسلاید */
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
-}
-
-/* اسلاید فعال */
-.slide.active {
-  opacity: 1;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* اطلاعات روی اسلاید (ژانر، پلات ...) */
-.hero-info {
-  position: absolute;
-  bottom: 80px;
-  left: 70px;
-  color: #fff;
-  max-width: 40%;
-}
-.movie-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 15px;
+.title h2 {
+  font-family: "inter.thin";
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  line-height: 1.2;
+  font-size: 28px;
 }
-
-/* ژانرها */
-.genres span {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.15);
-  cursor: pointer;
-  padding: 6px 14px;
-  border-radius: 16px;
-  margin-right: 6px;
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-.genres span a {
-  color: white;
-  text-decoration: none;
-}
-
-/* پلات */
-.hero-info p {
-  margin-top: 15px;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #e3e3e3;
-}
-
-/* تاریخ انتشار */
-.hero-info span {
-  display: inline-block;
-  margin-top: 20px;
-  font-weight: bold;
-  font-size: 16px;
-  color: white;
-}
-.genres span:hover {
-  background-color: #000;
-}
-
-/* ریسپانسیو */
-@media (max-width: 768px) {
-  .hero-info {
-    left: 25px;
-    bottom: 50px;
-    max-width: 80%;
-  }
-
-  .hero-info p {
-    font-size: 14px;
-  }
-
-  .genres span {
-    font-size: 12px;
-    padding: 4px 10px;
-  }
-}
-
 /* MOVIE-ITEMS  */
 .movie-items {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 25px;
-  padding: 0;
+  padding-top: 30px;
 }
 
 .movie-items li {
@@ -388,7 +293,6 @@ body {
 .suggest-item:hover {
   background: #444;
 }
-
 /* FOOTER */
 .main-footer {
   background-color: #000;
@@ -488,24 +392,4 @@ body {
   width: 60px;
   height: 60px;
   animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    width: 180px;
-  }
-
-  .hamburger2 {
-    width: 180px;
-    left: 0;
-  }
 }

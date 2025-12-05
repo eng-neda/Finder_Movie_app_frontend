@@ -1,18 +1,17 @@
-// genre.js - صفحه ژانر
-document.addEventListener("DOMContentLoaded", function () {
-  // مدیریت منوی ژانر
+document.addEventListener("DOMContentLoaded", () => {
+  // -------------------- MENU --------------------
   const dropBtns = document.querySelectorAll(".drop-btn");
   const submenus = document.querySelectorAll(".hamburger2");
 
   dropBtns.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
+    btn.addEventListener("click", (e) => {
       e.preventDefault();
-      const submenu = this.nextElementSibling;
+      const submenu = btn.nextElementSibling;
       submenu.classList.toggle("active");
     });
   });
 
-  document.addEventListener("click", function (e) {
+  document.addEventListener("click", (e) => {
     submenus.forEach((submenu) => {
       if (
         !submenu.contains(e.target) &&
@@ -23,165 +22,226 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // دریافت ژانر از URL
+  // -------------------- API --------------------
+  const API_KEY = "101b33b46964ec28c577f761f37619fb";
+  const BASE_URL = "https://api.themoviedb.org/3";
+  const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
+
+  // TMDB genre IDs
+  const genreMap = {
+    action: 28,
+    adventure: 12,
+    animation: 16,
+    comedy: 35,
+    crime: 80,
+    drama: 18,
+    fantasy: 14,
+    horror: 27,
+    "sci-fi": 878,
+  };
+
+  const genreListItems = document.querySelectorAll(".genre-list li");
+  const moviesContainer = document.getElementById("movies-container");
+
+  // ---------------------------------------------------
+  // تابع اصلی لود فیلم‌ها با ژانر
+  // ---------------------------------------------------
+  async function loadMoviesByGenre(genreKey) {
+    const genreId = genreMap[genreKey];
+    if (!genreId) return;
+
+    moviesContainer.innerHTML = "<p style='color:white'>Loading...</p>";
+
+    try {
+      const res = await fetch(
+        `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`
+      );
+      const data = await res.json();
+      const movies = data.results || [];
+
+      if (movies.length === 0) {
+        moviesContainer.innerHTML =
+          "<p style='color:white'>No movies found.</p>";
+        return;
+      }
+
+      moviesContainer.innerHTML = "";
+
+      for (const movie of movies) {
+        const detailRes = await fetch(
+          `${BASE_URL}/movie/${movie.id}?api_key=${API_KEY}&append_to_response=credits`
+        );
+        const movieDetail = await detailRes.json();
+
+        const director =
+          movieDetail.credits?.crew?.find((c) => c.job === "Director")?.name ||
+          "N/A";
+
+        const stars =
+          movieDetail.credits?.cast
+            ?.slice(0, 5)
+            .map((s) => s.name)
+            .join(", ") || "N/A";
+
+        const genres =
+          movieDetail.genres?.map((g) => g.name).join(", ") || "N/A";
+
+        const runtime = movieDetail.runtime
+          ? `${Math.floor(movieDetail.runtime / 60)}h ${
+              movieDetail.runtime % 60
+            }m`
+          : "N/A";
+
+        const year = movie.release_date
+          ? new Date(movie.release_date).getFullYear()
+          : "N/A";
+
+        const rating = movie.vote_average
+          ? movie.vote_average.toFixed(1)
+          : "N/A";
+
+        const movieCard = document.createElement("div");
+        movieCard.className = "movie-card";
+
+        movieCard.innerHTML = `
+          <img src="${
+            movie.poster_path
+              ? `${IMAGE_BASE_URL}/w200${movie.poster_path}`
+              : "picture/1.jpg"
+          }" alt="${movie.title}">
+
+          <div class="movie-info">
+            
+            <div class="title-rank">
+              <h3>${movie.title}</h3>
+              <span class="rating">⭐ ${rating}</span>
+            </div>
+
+            <div class="movie-meta">
+              <span class="year">${year}</span>
+              <span class="runtime"> - ${runtime}</span>
+            </div>
+
+            <p class="genre"><strong></strong> ${genres}</p>
+            <p><strong></strong> ${
+              movieDetail.overview || "No plot available"
+            }</p>
+
+            <p><strong>Director:</strong> ${director}</p>
+            <p><strong>Stars:</strong> ${stars}</p>
+            <p><strong>Votes:</strong> ${movie.vote_count || "N/A"}</p>
+          </div>
+        `;
+
+        movieCard.addEventListener("click", () => {
+          window.location.href = `detailPage.html?id=${movie.id}`;
+        });
+
+        moviesContainer.appendChild(movieCard);
+      }
+    } catch (err) {
+      console.error("Error loading movies:", err);
+      moviesContainer.innerHTML =
+        "<p style='color:red'>Error loading movies.</p>";
+    }
+  }
+
+  // ---------------------------------------------------
+  // ۱) کلیک روی لیست سمت چپ genre-list
+  // ---------------------------------------------------
+  genreListItems.forEach((li) => {
+    li.addEventListener("click", () => {
+      const g = li.dataset.genre;
+      loadMoviesByGenre(g);
+    });
+  });
+
+  // ---------------------------------------------------
+  // ۲) گرفتن ژانر از URL (برای منوی کشویی)
+  // ---------------------------------------------------
   const urlParams = new URLSearchParams(window.location.search);
-  const genre = urlParams.get("genre") || "action";
+  const urlGenre = urlParams.get("genre");
 
-  // به‌روزرسانی عنوان
-  document.getElementById("genre-title").textContent = `${
-    genre.charAt(0).toUpperCase() + genre.slice(1)
-  } Movies`;
+  if (urlGenre && genreMap[urlGenre]) {
+    loadMoviesByGenre(urlGenre);
+  }
 
-  // لود فیلم‌های ژانر
-  loadGenreMovies(genre);
-});
+  // -------------------- SEARCH SUGGESTIONS --------------------
 
-const API_KEY = "45f67256";
+  const SEARCH_API = "https://api.themoviedb.org/3/search/movie";
+  const IMAGE_BASE_URL1 = "https://image.tmdb.org/t/p/w92";
 
-async function loadGenreMovies(genre, page = 1) {
-  const container = document.getElementById("movies-container");
-  const pagination = document.getElementById("pagination");
+  // وقتی تایپ میکند → پیشنهاد بده
+  searchInput.addEventListener("input", async () => {
+    const query = searchInput.value.trim();
 
-  // نمایش لودینگ
-  container.innerHTML = `
-    <div class="loading-container">
-      <div class="spinner"></div>
-      <p>Loading ${genre} movies...</p>
-    </div>
-  `;
-
-  try {
-    // جستجوی فیلم‌های این ژانر
-    const url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${genre}&type=movie&page=${page}`;
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (data.Response === "False") {
-      container.innerHTML = `
-        <div class="error-state">
-          <p>No ${genre} movies found.</p>
-        </div>
-      `;
+    if (query.length < 2) {
+      suggestionsBox.style.display = "none";
+      suggestionsBox.innerHTML = "";
       return;
     }
 
-    // نمایش فیلم‌ها
-    renderMovies(data.Search, container);
+    try {
+      const res = await fetch(
+        `${SEARCH_API}?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
+      );
+      const data = await res.json();
 
-    // ایجاد صفحه‌بندی
-    renderPagination(data.totalResults, page, genre);
-  } catch (error) {
-    console.error("Error loading genre movies:", error);
-    container.innerHTML = `
-      <div class="error-state">
-        <p>Failed to load movies. Please try again.</p>
-      </div>
-    `;
-  }
-}
+      suggestionsBox.innerHTML = "";
+      suggestionsBox.style.display = "block";
 
-function renderMovies(movies, container) {
-  container.innerHTML = "";
+      // فقط 6 پیشنهاد
+      for (const movie of data.results.slice(0, 6)) {
+        // گرفتن جزئیات فیلم برای ژانر
+        const detailRes = await fetch(
+          `${BASE_URL}/movie/${movie.id}?api_key=${API_KEY}`
+        );
+        const details = await detailRes.json();
+        const genres = details.genres
+          ? details.genres
+              .map((g) => g.name)
+              .slice(0, 2)
+              .join(", ")
+          : "Unknown";
 
-  const ul = document.createElement("ul");
-  ul.classList.add("movie-items");
+        const item = document.createElement("div");
+        item.className = "suggest-item";
 
-  movies.forEach((movie) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <div class="photo">
-        <img src="${
-          movie.Poster !== "N/A" ? movie.Poster : "picture/hero.jpg"
-        }" 
-             alt="${movie.Title}">
-      </div>
-      <div class="movie-info">
-        <h3>${movie.Title}</h3>
-        <p>${movie.Year}</p>
-        <div class="rank">
-          <span>⭐</span>
-          <button class="view-btn" onclick="viewMovie('${
-            movie.imdbID
-          }')">View Info</button>
+        // ساختار HTML پیشنهاد
+        item.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="${
+            movie.poster_path
+              ? `${IMAGE_BASE_URL1}${movie.poster_path}`
+              : "picture/hero.jpg"
+          }" alt="${
+          movie.title
+        }" style="width: 50px; height: 75px; object-fit: cover; border-radius: 5px;">
+          <div>
+            <strong>${movie.title}</strong>
+            <p style="font-size: 12px; margin: 2px 0; color: #ccc;">${genres}</p>
+          </div>
         </div>
-      </div>
-    `;
-    ul.appendChild(li);
-  });
+      `;
 
-  container.appendChild(ul);
-}
+        // کلیک روی پیشنهاد → صفحه search.html
+        item.addEventListener("click", () => {
+          window.location.href = `search.html?query=${encodeURIComponent(
+            movie.title
+          )}`;
+        });
 
-function renderPagination(totalResults, currentPage, genre) {
-  const pagination = document.getElementById("pagination");
-  if (!pagination) return;
-
-  const totalPages = Math.ceil(totalResults / 10);
-
-  if (totalPages <= 1) {
-    pagination.innerHTML = "";
-    return;
-  }
-
-  let html = `
-    <button id="prevBtn" ${
-      currentPage === 1 ? "disabled" : ""
-    }>Previous</button>
-    <div id="pageNumbers"></div>
-    <button id="nextBtn" ${
-      currentPage === totalPages ? "disabled" : ""
-    }>Next</button>
-  `;
-
-  pagination.innerHTML = html;
-
-  // اضافه کردن شماره صفحات
-  const pageNumbers = document.getElementById("pageNumbers");
-  for (let i = 1; i <= Math.min(totalPages, 5); i++) {
-    const btn = document.createElement("button");
-    btn.textContent = i;
-    btn.className = "page-btn";
-    if (i === currentPage) btn.classList.add("active");
-
-    btn.addEventListener("click", () => {
-      loadGenreMovies(genre, i);
-      window.scrollTo(0, 0);
-    });
-
-    pageNumbers.appendChild(btn);
-  }
-
-  // مدیریت دکمه‌های قبلی/بعدی
-  document.getElementById("prevBtn").addEventListener("click", () => {
-    if (currentPage > 1) {
-      loadGenreMovies(genre, currentPage - 1);
-      window.scrollTo(0, 0);
-    }
-  });
-
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    if (currentPage < totalPages) {
-      loadGenreMovies(genre, currentPage + 1);
-      window.scrollTo(0, 0);
-    }
-  });
-}
-
-function viewMovie(movieId) {
-  window.location.href = `detailPage.html?id=${movieId}`;
-}
-
-// مدیریت جستجو
-const searchInput = document.querySelector(".search-box input");
-if (searchInput) {
-  searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      const query = searchInput.value.trim();
-      if (query) {
-        window.location.href = `searchResults.html?query=${encodeURIComponent(
-          query
-        )}`;
+        suggestionsBox.appendChild(item);
       }
+    } catch (err) {
+      console.error("Search error:", err);
     }
   });
-}
+
+  // مخفی کردن پیشنهاد‌ها وقتی کاربر بیرون کلیک کند
+  document.addEventListener("click", (e) => {
+    if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+      suggestionsBox.style.display = "none";
+    }
+  });
+});

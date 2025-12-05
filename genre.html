@@ -3,25 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Genre - Movie Finder</title>
-    <link rel="icon" href="picture/imdb.icon.png" />
-    <link rel="stylesheet" href="app.css/index.css" />
+    <title>Genre Movies</title>
+    <link rel="stylesheet" href="app.css/gener.css" />
   </head>
   <body>
-    <!-- Header (مشابه index.html) -->
     <header class="header">
       <div class="logo">
-        <a href="index.html">
-          <img src="picture/imbd.png" alt="Movie Finder" />
-        </a>
+        <a href="index.html"><img src="picture/imbd.png" /></a>
       </div>
       <div class="search-box">
         <input
           type="search"
-          placeholder="Search for movies..."
+          placeholder="Search IMDb"
           id="searchInput"
+          autocomplete="off"
         />
+
+        <!-- Suggestions box -->
+        <div class="search-suggestions" id="suggestionsBox"></div>
       </div>
+
       <div class="hamburger">
         <ul>
           <li class="dropdown">
@@ -29,26 +30,55 @@
               Genres <span class="icon-circle-down"></span>
             </a>
             <ul class="hamburger2">
-              <!-- لیست ژانرها -->
+              <li><a href="genre.html?genre=action">Action</a></li>
+              <li><a href="genre.html?genre=adventure">Adventure</a></li>
+              <li><a href="genre.html?genre=animation">Animation</a></li>
+              <li><a href="genre.html?genre=comedy">Comedy</a></li>
+              <li><a href="genre.html?genre=crime">Crime</a></li>
+              <li><a href="genre.html?genre=drama">Drama</a></li>
+              <li><a href="genre.html?genre=fantasy">Fantasy</a></li>
+              <li><a href="genre.html?genre=horror">Horror</a></li>
+              <li><a href="genre.html?genre=sci-fi">Sci-Fi</a></li>
             </ul>
           </li>
         </ul>
       </div>
     </header>
+    <!-- Genre  -->
+    <div class="genre-page">
+      <!-- سمت چپ: لیست ژانرها -->
+      <aside class="genre-sidebar">
+        <ul class="genre-list">
+          <li data-genre="action">Action</li>
+          <li data-genre="adventure">Adventure</li>
+          <li data-genre="animation">Animation</li>
+          <li data-genre="comedy">Comedy</li>
+          <li data-genre="crime">Crime</li>
+          <li data-genre="drama">Drama</li>
+          <li data-genre="fantasy">Fantasy</li>
+          <li data-genre="horror">Horror</li>
+          <li data-genre="sci-fi">Sci-Fi</li>
+        </ul>
+      </aside>
 
-    <main class="container">
-      <h1 id="genre-title" class="page-title">Action Movies</h1>
-      <div id="movies-container" class="movies-grid">
-        <!-- فیلم‌ها اینجا لود می‌شوند -->
-      </div>
-      <div id="pagination" class="pagination"></div>
-    </main>
+      <!-- سمت راست: لیست فیلم‌های ژانر انتخابی -->
+      <main class="genre-movies">
+        <div id="movies-container" class="movies-container">
+          <!-- فیلم‌ها اینجا با JS ساخته می‌شوند -->
+        </div>
+      </main>
+    </div>
 
+    <!-- FOOTER -->
     <footer class="main-footer">
       <div class="footer-content">
         <p>&copy; 2025 by Karyar Studio</p>
       </div>
     </footer>
+
+    <div id="loadingOverlay" class="loading-overlay" style="display: none">
+      Loading...
+    </div>
 
     <script src="script.js/genre.js"></script>
   </body>

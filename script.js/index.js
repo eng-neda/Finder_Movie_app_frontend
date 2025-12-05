@@ -42,6 +42,88 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSearch = "avengers";
   let totalPages = 1;
 
+  // ------------------------------------
+  // SEARCH AUTOCOMPLETE
+  // ------------------------------------
+
+  const suggestionsBox = document.getElementById("suggestionsBox");
+  const SEARCH_API = "https://api.themoviedb.org/3/search/movie";
+  const IMAGE_BASE_URL1 = "https://image.tmdb.org/t/p/w92"; // عکس کوچک
+
+  // وقتی تایپ میکند → پیشنهاد بده
+  searchInput.addEventListener("input", async () => {
+    const query = searchInput.value.trim();
+
+    if (query.length < 2) {
+      suggestionsBox.style.display = "none";
+      suggestionsBox.innerHTML = "";
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `${SEARCH_API}?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
+      );
+      const data = await res.json();
+
+      suggestionsBox.innerHTML = "";
+      suggestionsBox.style.display = "block";
+
+      // فقط 6 پیشنهاد
+      for (const movie of data.results.slice(0, 6)) {
+        // گرفتن جزئیات فیلم برای ژانر
+        const detailRes = await fetch(
+          `${BASE_URL}/movie/${movie.id}?api_key=${API_KEY}`
+        );
+        const details = await detailRes.json();
+        const genres = details.genres
+          ? details.genres
+              .map((g) => g.name)
+              .slice(0, 2)
+              .join(", ")
+          : "Unknown";
+
+        const item = document.createElement("div");
+        item.className = "suggest-item";
+
+        // ساختار HTML پیشنهاد
+        item.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="${
+            movie.poster_path
+              ? `${IMAGE_BASE_URL1}${movie.poster_path}`
+              : "picture/hero.jpg"
+          }" alt="${
+          movie.title
+        }" style="width: 50px; height: 75px; object-fit: cover; border-radius: 5px;">
+          <div>
+            <strong>${movie.title}</strong>
+            <p style="font-size: 12px; margin: 2px 0; color: #ccc;">${genres}</p>
+          </div>
+        </div>
+      `;
+
+        // کلیک روی پیشنهاد → صفحه search.html
+        item.addEventListener("click", () => {
+          window.location.href = `search.html?query=${encodeURIComponent(
+            movie.title
+          )}`;
+        });
+
+        suggestionsBox.appendChild(item);
+      }
+    } catch (err) {
+      console.error("Search error:", err);
+    }
+  });
+
+  // وقتی بیرون کلیک شد → بسته شود
+  document.addEventListener("click", (e) => {
+    if (!searchInput.contains(e.target)) {
+      suggestionsBox.style.display = "none";
+    }
+  });
+
   // -------------------------
   // اسلایدر
   // -------------------------
@@ -88,7 +170,12 @@ document.addEventListener("DOMContentLoaded", () => {
           genreEl.innerHTML = genres
             ? genres
                 .split(",")
-                .map((g) => `<span><a href="">${g.trim()}</a></span>`)
+                .map(
+                  (g) =>
+                    `<span><a href="genre.html?genre=${g
+                      .trim()
+                      .toLowerCase()}">${g.trim()}</a></span>`
+                )
                 .join("")
             : "<span>No genre</span>";
         }
