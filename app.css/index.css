@@ -12,6 +12,10 @@ li {
 a {
   text-decoration: none;
 }
+html,
+body {
+  overflow-x: hidden;
+}
 @font-face {
   font-family: "inter";
   src: url(../fonts/static/Inter_18pt-Regular.ttf);
@@ -584,7 +588,7 @@ body {
   }
 
   .movie-info h3 {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .movie-info p {
@@ -594,7 +598,7 @@ body {
   .rank .view-btn {
     font-size: 12px;
     width: 80px;
-    height: 30px;
+    height: 20px;
   }
 
   /* PAGINATION */

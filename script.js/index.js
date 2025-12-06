@@ -217,11 +217,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let limit = 20;
 
     if (window.innerWidth <= 480) {
-      limit = 1;
-    } else if (window.innerWidth <= 768) {
       limit = 4;
-    } else if (window.innerWidth <= 1024) {
+    } else if (window.innerWidth <= 768) {
       limit = 8;
+    } else if (window.innerWidth <= 1024) {
+      limit = 12;
     }
 
     movies = movies.slice(0, limit);

@@ -1,0 +1,66 @@
+🎬 Movie Finder – Frontend
+
+A clean and responsive Movie Finder application built with Vanilla JavaScript, HTML, and CSS.
+Users can search for movies, explore genres, and view detailed information using a public movie API (TMDb / OMDb).
+
+🚀 Features
+
+Live Movie Search (with dropdown suggestions)
+
+Search Results Page with pagination
+
+Movie Details Page including cast, crew, runtime, ratings, and genres
+
+Genre Page to filter movies by categories
+
+Loading, Error, and Empty States for better UX
+
+Fully Responsive (mobile, tablet, desktop)
+
+index.html # Home page
+search.html # Search results page
+movie.html # Movie details page
+genre.html # Genre listing page
+
+⚡ Usage
+
+Open index.html in your browser.
+
+Start typing in the search bar to see movie suggestions.
+
+Press Enter to view full search results.
+
+Click any movie to view detailed information.
+
+Navigate through genres to discover more movies.
+
+🔌 API
+
+The project uses a public movie API such as:
+
+TMDb API – https://www.themoviedb.org
+
+You must add your API key in the JavaScript configuration before running the project.
+
+🛠 Tech Stack
+
+HTML5
+
+CSS3 (Vanilla)
+
+JavaScript (ES6+)
+
+Fetch API for communicating with the movie database
+
+🌐 Live Demo
+
+Link to online demo:
+👉 https://eng-neda.github.io/Finder_Movie_app_frontend/
+
+📘 Notes
+
+No frameworks or libraries were used (no React, no jQuery, no Tailwind).
+
+Designed to match the provided Figma UI as closely as possible.
+
+Works across all major screen sizes.
