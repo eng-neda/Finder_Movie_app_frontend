@@ -578,29 +578,6 @@ body {
   }
 
   /* MOVIE LIST */
-  /* .movie-items {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-  }
-
-  .movie-items li {
-    height: 310px;
-  }
-
-  .movie-info h3 {
-    font-size: 12px;
-  }
-
-  .movie-info p {
-    font-size: 12px;
-  }
-
-  .rank .view-btn {
-    font-size: 12px;
-    width: 80px;
-    height: 20px;
-  }
-  ////// */
   @media (max-width: 767px) {
     .container {
       width: 95%;
@@ -671,7 +648,7 @@ body {
 
     .rank .view-btn {
       width: 70px;
-      height: 28px;
+      height: 30px;
       font-size: 12px;
     }
 
