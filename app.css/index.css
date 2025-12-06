@@ -42,8 +42,6 @@ a {
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -201,8 +199,6 @@ body {
   border-radius: 1px;
   margin-bottom: 20px;
 }
-
-/* هر اسلاید */
 .slide {
   position: absolute;
   top: 0;
@@ -212,8 +208,6 @@ body {
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
-
-/* اسلاید فعال */
 .slide.active {
   opacity: 1;
 }
@@ -224,7 +218,6 @@ body {
   object-fit: cover;
 }
 
-/* اطلاعات روی اسلاید (ژانر، پلات ...) */
 .hero-info {
   position: absolute;
   bottom: 80px;
@@ -241,7 +234,6 @@ body {
   line-height: 1.2;
 }
 
-/* ژانرها */
 .genres span {
   display: inline-block;
   background: rgba(255, 255, 255, 0.15);
@@ -258,7 +250,6 @@ body {
   text-decoration: none;
 }
 
-/* پلات */
 .hero-info p {
   margin-top: 15px;
   font-size: 16px;
@@ -266,7 +257,6 @@ body {
   color: #e3e3e3;
 }
 
-/* تاریخ انتشار */
 .hero-info span {
   display: inline-block;
   margin-top: 20px;
@@ -276,24 +266,6 @@ body {
 }
 .genres span:hover {
   background-color: #000;
-}
-
-/* ریسپانسیو */
-@media (max-width: 768px) {
-  .hero-info {
-    left: 25px;
-    bottom: 50px;
-    max-width: 80%;
-  }
-
-  .hero-info p {
-    font-size: 14px;
-  }
-
-  .genres span {
-    font-size: 12px;
-    padding: 4px 10px;
-  }
 }
 
 /* MOVIE-ITEMS  */
@@ -405,10 +377,9 @@ body {
   justify-content: center;
   align-items: center;
   margin: 25px 0;
-  gap: 8px; /* فاصله بین آیتم‌ها */
+  gap: 8px;
 }
 
-/* دکمه‌های فلش */
 .arrow-btn {
   background: #111;
   color: white;
@@ -425,14 +396,12 @@ body {
   color: #000;
 }
 
-/* کانتینر شماره صفحات */
 #pageNumbers {
   display: flex;
   margin: 20px 10px;
-  gap: 20px; /* فاصله بین اعداد */
+  gap: 20px;
 }
 
-/* هر عدد صفحه */
 .page-btn {
   padding: 8px 14px;
   background: transparent;
@@ -444,20 +413,17 @@ body {
   border-radius: 50%;
 }
 
-/* عدد صفحه فعال */
 .page-btn.active {
   background: #ffcc00;
   color: #000;
   font-size: 18px;
 }
 
-/* هاور عدد صفحه */
 .page-btn:hover {
   background: #ffcc00;
   color: #000;
 }
 
-/* سه نقطه */
 .ellipsis {
   color: #777;
   padding: 5px;
@@ -465,8 +431,7 @@ body {
   display: flex;
   align-items: center;
 }
-
-/* overlay  */
+/* Loading */
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -480,10 +445,9 @@ body {
   z-index: 9999;
 }
 
-/* spinner چرخان */
 .spinner {
-  border: 8px solid #f3f3f3; /* خاکستری روشن */
-  border-top: 8px solid #3498db; /* آبی */
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -498,14 +462,154 @@ body {
     transform: rotate(360deg);
   }
 }
+/* DESKTOP  */
+@media (min-width: 1200px) {
+  .main {
+    height: 90vh;
+  }
 
+  .movie-items {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+  }
+
+  .movie-items li {
+    height: 450px;
+  }
+
+  .movie-title {
+    font-size: 2.8rem;
+  }
+
+  .hero-info p {
+    font-size: 18px;
+  }
+
+  .search-suggestions {
+    width: 48%;
+  }
+}
+/* TABLET  */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .main {
+    height: 75vh;
+  }
+
+  .hero-info {
+    max-width: 55%;
+  }
+
+  .movie-items {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .movie-items li {
+    height: 380px;
+  }
+
+  .movie-info h3 {
+    font-size: 17px;
+  }
+
+  .search-suggestions {
+    width: 60%;
+  }
+}
+/* MOBILE  */
 @media (max-width: 768px) {
+  /* HEADER */
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 20px;
+    margin: 0;
+    gap: 10px;
+    position: relative;
+  }
+
+  .logo {
+    width: 100%;
+    text-align: center;
+  }
+
+  .logo img {
+    width: 100px;
+    height: auto;
+  }
+
+  .search-box {
+    width: 100%;
+    padding: 0;
+  }
+
   .hamburger {
-    width: 180px;
+    width: 100%;
+    text-align: left;
+    margin-top: 5px;
   }
 
   .hamburger2 {
-    width: 180px;
+    width: 100%;
     left: 0;
+  }
+
+  /* SLIDER */
+  .main {
+    height: 60vh;
+  }
+
+  .hero-info {
+    bottom: 20px;
+    left: 15px;
+    max-width: 85%;
+  }
+
+  .movie-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-info p {
+    font-size: 13px;
+  }
+
+  /* MOVIE LIST */
+  .movie-items {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .movie-items li {
+    height: 310px;
+  }
+
+  .movie-info h3 {
+    font-size: 14px;
+  }
+
+  .movie-info p {
+    font-size: 12px;
+  }
+
+  .rank .view-btn {
+    font-size: 12px;
+    width: 80px;
+    height: 30px;
+  }
+
+  /* PAGINATION */
+  .page-btn {
+    font-size: 13px;
+    padding: 5px 8px;
+  }
+
+  .arrow-btn {
+    padding: 8px 10px;
+  }
+
+  /* SUGGESTIONS BOX */
+  .search-suggestions {
+    width: 100%;
+    border-radius: 6px;
   }
 }

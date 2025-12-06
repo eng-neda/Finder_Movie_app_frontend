@@ -201,7 +201,6 @@ body {
   gap: 20px;
 }
 
-/* سمت چپ */
 .genre-sidebar {
   flex: 0 0 200px;
   padding: 20px;
@@ -241,7 +240,7 @@ body {
   border-radius: 3px;
 }
 
-/* سمت راست */
+/* Display-Movie  */
 .genre-movies {
   flex: 1;
 }
@@ -340,4 +339,157 @@ body {
 
 .suggest-item:hover {
   background: #444;
+}
+/* Tablet */
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 15px 20px;
+    margin: 0;
+  }
+
+  .logo {
+    width: auto;
+    margin-bottom: 10px;
+  }
+
+  .search-box {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+
+  .search-box input {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .hamburger {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .genre-page {
+    flex-direction: column;
+    margin: 10px 20px;
+  }
+
+  .genre-sidebar {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .genre-movies {
+    width: 100%;
+  }
+
+  .movie-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .movie-card img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+  }
+
+  .movie-info {
+    align-items: center;
+  }
+
+  .title-rank {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .container {
+    width: 95%;
+  }
+
+  .header {
+    padding: 10px 15px;
+  }
+
+  .logo img {
+    width: 100px;
+    height: auto;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-box input {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .hamburger > ul > li > a.drop-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .genre-page {
+    flex-direction: column;
+    margin: 5px 10px;
+    gap: 15px;
+  }
+
+  .genre-sidebar {
+    width: 100%;
+    padding: 10px;
+    height: auto;
+  }
+
+  .genre-list li {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .genre-movies h2 {
+    font-size: 22px;
+  }
+
+  .movie-card {
+    padding: 8px;
+    gap: 10px;
+  }
+
+  .movie-card img {
+    max-width: 150px;
+  }
+
+  .movie-info {
+    gap: 3px;
+  }
+
+  .title-rank h3 {
+    font-size: 16px;
+  }
+
+  .title-rank .rating {
+    font-size: 14px;
+  }
+
+  .movie-meta,
+  .movie-info .genre,
+  .movie-info p {
+    font-size: 13px;
+  }
+
+  .search-suggestions {
+    width: 100%;
+  }
 }

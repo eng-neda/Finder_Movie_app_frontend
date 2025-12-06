@@ -309,10 +309,9 @@ body {
   justify-content: center;
   align-items: center;
   margin: 25px 0;
-  gap: 8px; /* فاصله بین آیتم‌ها */
+  gap: 8px;
 }
 
-/* دکمه‌های فلش */
 .arrow-btn {
   background: #111;
   color: white;
@@ -329,14 +328,12 @@ body {
   color: #000;
 }
 
-/* کانتینر شماره صفحات */
 #pageNumbers {
   display: flex;
   margin: 20px 10px;
-  gap: 20px; /* فاصله بین اعداد */
+  gap: 20px;
 }
 
-/* هر عدد صفحه */
 .page-btn {
   padding: 8px 14px;
   background: transparent;
@@ -348,20 +345,17 @@ body {
   border-radius: 50%;
 }
 
-/* عدد صفحه فعال */
 .page-btn.active {
   background: #ffcc00;
   color: #000;
   font-size: 18px;
 }
 
-/* هاور عدد صفحه */
 .page-btn:hover {
   background: #ffcc00;
   color: #000;
 }
 
-/* سه نقطه */
 .ellipsis {
   color: #777;
   padding: 5px;
@@ -383,13 +377,203 @@ body {
   align-items: center;
   z-index: 9999;
 }
-
-/* spinner چرخان */
 .spinner {
-  border: 8px solid #f3f3f3; /* خاکستری روشن */
-  border-top: 8px solid #3498db; /* آبی */
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   animation: spin 1s linear infinite;
+}
+
+/* TABLET  */
+
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+    height: auto;
+    margin: 0;
+  }
+
+  .logo {
+    width: auto;
+    margin-bottom: 10px;
+  }
+
+  .logo img {
+    width: 100px;
+    height: auto;
+  }
+
+  .search-box {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+
+  .search-box input {
+    width: 100%;
+    font-size: 14px;
+    height: 40px;
+  }
+
+  .hamburger {
+    width: 100%;
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .hamburger2 {
+    left: 0;
+    width: 100%;
+  }
+
+  .title {
+    margin: 30px 10px;
+  }
+
+  .movie-items {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    padding-top: 20px;
+  }
+
+  .movie-items li {
+    width: 100%;
+    height: auto;
+  }
+
+  .photo {
+    height: 200px;
+  }
+
+  .movie-info {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .movie-info h3 {
+    font-size: 16px;
+  }
+
+  .movie-info p {
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+
+  .rank .view-btn {
+    width: 80px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .search-suggestions {
+    width: 100%;
+  }
+
+  .pagination {
+    gap: 5px;
+    margin: 20px 0;
+  }
+
+  .page-btn {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+}
+
+/* MOBILE   */
+@media (max-width: 767px) {
+  .container {
+    width: 95%;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+    height: auto;
+    margin: 0;
+  }
+
+  .logo img {
+    width: 90px;
+  }
+
+  .search-box input {
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .hamburger > ul > li > a.drop-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .hamburger2 {
+    width: 100%;
+    left: 0;
+  }
+
+  .title {
+    margin: 20px 5px;
+  }
+
+  .title h2 {
+    font-size: 24px;
+  }
+
+  .movie-items {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    padding-top: 15px;
+  }
+
+  .movie-items li {
+    height: auto;
+  }
+
+  .photo {
+    height: 180px;
+  }
+
+  .movie-info {
+    padding: 6px 8px;
+    gap: 5px;
+  }
+
+  .movie-info h3 {
+    font-size: 14px;
+  }
+
+  .movie-info p {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .rank .view-btn {
+    width: 70px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .search-suggestions {
+    width: 100%;
+  }
+
+  .pagination {
+    gap: 4px;
+    margin: 15px 0;
+  }
+
+  .page-btn {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
 }

@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // -------------------------
-  // تنظیم منوها
-  // -------------------------
+  // -------------------- MENU --------------------
   const dropBtns = document.querySelectorAll(".drop-btn");
   const submenus = document.querySelectorAll(".hamburger2");
 
@@ -23,10 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
-  // -------------------------
-  // API
-  // -------------------------
+  // -------------------- API --------------------
   const API_KEY = "101b33b46964ec28c577f761f37619fb";
   const BASE_URL = "https://api.themoviedb.org/3";
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
@@ -42,19 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSearch = "avengers";
   let totalPages = 1;
 
-  // ------------------------------------
-  // SEARCH AUTOCOMPLETE
-  // ------------------------------------
-
+  // -------------------- search-suggestions --------------------
   const suggestionsBox = document.getElementById("suggestionsBox");
   const SEARCH_API = "https://api.themoviedb.org/3/search/movie";
-  const IMAGE_BASE_URL1 = "https://image.tmdb.org/t/p/w92"; // عکس کوچک
+  const IMAGE_BASE_URL1 = "https://image.tmdb.org/t/p/w92";
 
-  // وقتی تایپ میکند → پیشنهاد بده
   searchInput.addEventListener("input", async () => {
     const query = searchInput.value.trim();
 
-    if (query.length < 2) {
+    if (query.length < 1) {
       suggestionsBox.style.display = "none";
       suggestionsBox.innerHTML = "";
       return;
@@ -69,9 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       suggestionsBox.innerHTML = "";
       suggestionsBox.style.display = "block";
 
-      // فقط 6 پیشنهاد
       for (const movie of data.results.slice(0, 6)) {
-        // گرفتن جزئیات فیلم برای ژانر
         const detailRes = await fetch(
           `${BASE_URL}/movie/${movie.id}?api_key=${API_KEY}`
         );
@@ -86,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const item = document.createElement("div");
         item.className = "suggest-item";
 
-        // ساختار HTML پیشنهاد
         item.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px;">
           <img src="${
@@ -103,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
-        // کلیک روی پیشنهاد → صفحه search.html
         item.addEventListener("click", () => {
           window.location.href = `search.html?query=${encodeURIComponent(
             movie.title
@@ -117,16 +104,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // وقتی بیرون کلیک شد → بسته شود
   document.addEventListener("click", (e) => {
     if (!searchInput.contains(e.target)) {
       suggestionsBox.style.display = "none";
     }
   });
-
-  // -------------------------
-  // اسلایدر
-  // -------------------------
+  // -------------------- Slider --------------------
   async function loadSliderMovies() {
     try {
       const res = await fetch(
@@ -193,9 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // -------------------------
-  // Fetch فیلم‌ها
-  // -------------------------
+  // -------------------- Fetch-Movies--------------------
   async function fetchMovies(search, page) {
     loadingOverlay.style.display = "flex";
 
@@ -231,11 +212,20 @@ document.addEventListener("DOMContentLoaded", () => {
       loadingOverlay.style.display = "none";
     }
   }
-
-  // -------------------------
-  // نمایش فیلم‌ها
-  // -------------------------
+  // -------------------- Display-Movies--------------------
   async function renderMovies(movies) {
+    let limit = 20;
+
+    if (window.innerWidth <= 480) {
+      limit = 1;
+    } else if (window.innerWidth <= 768) {
+      limit = 4;
+    } else if (window.innerWidth <= 1024) {
+      limit = 8;
+    }
+
+    movies = movies.slice(0, limit);
+
     movieContainer.innerHTML = "";
 
     const ul = document.createElement("ul");
@@ -283,9 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
     movieContainer.appendChild(ul);
   }
 
-  // -------------------------
-  // صفحه‌بندی حرفه‌ای ← سه نقطه + فلش
-  // -------------------------
+  // -------------------- PAGINATION--------------------
   function renderPagination() {
     pageNumbers.innerHTML = "";
 
@@ -345,10 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
       fetchMovies(currentSearch, currentPage);
     }
   });
-
-  // -------------------------
-  // جستجو
-  // -------------------------
+  // -------------------- Search--------------------
   searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       currentSearch = searchInput.value.trim();
@@ -357,16 +342,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // -------------------------
-  // انتقال به صفحه جزئیات
-  // -------------------------
+  // -------------------- Go to detailPage--------------------
   window.viewDetails = (id) => {
     window.location.href = `detailPage.html?id=${id}`;
   };
 
-  // -------------------------
-  // شروع اسلایدر
-  // -------------------------
+  // -------------------- Start Slider--------------------
   function startSlider() {
     const slides = document.querySelectorAll(".slide");
     let current = 0;
@@ -381,9 +362,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 4000);
   }
 
-  // -------------------------
-  // اجرای اولیه
-  // -------------------------
   loadSliderMovies();
   fetchMovies(currentSearch, currentPage);
 });

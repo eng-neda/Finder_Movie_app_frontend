@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  // -------------------------
-  // تنظیم منوها
-  // -------------------------
+  // -------------------- MENU --------------------
   const dropBtns = document.querySelectorAll(".drop-btn");
   const submenus = document.querySelectorAll(".hamburger2");
 
@@ -27,9 +25,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // -------------------- SEARCH SUGGESTIONS --------------------
 
   const SEARCH_API = "https://api.themoviedb.org/3/search/movie";
-  const IMAGE_BASE_URL1 = "https://image.tmdb.org/t/p/w92"; // عکس کوچک
+  const IMAGE_BASE_URL1 = "https://image.tmdb.org/t/p/w92";
 
-  // وقتی تایپ میکند → پیشنهاد بده
   searchInput.addEventListener("input", async () => {
     const query = searchInput.value.trim();
 
@@ -48,9 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       suggestionsBox.innerHTML = "";
       suggestionsBox.style.display = "block";
 
-      // فقط 6 پیشنهاد
       for (const movie of data.results.slice(0, 6)) {
-        // گرفتن جزئیات فیلم برای ژانر
         const detailRes = await fetch(
           `${BASE_URL}/movie/${movie.id}?api_key=${API_KEY}`
         );
@@ -65,7 +60,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const item = document.createElement("div");
         item.className = "suggest-item";
 
-        // ساختار HTML پیشنهاد
         item.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px;">
           <img src="${
@@ -82,7 +76,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       `;
 
-        // کلیک روی پیشنهاد → صفحه search.html
         item.addEventListener("click", () => {
           window.location.href = `search.html?query=${encodeURIComponent(
             movie.title
@@ -96,16 +89,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // مخفی کردن پیشنهاد‌ها وقتی کاربر بیرون کلیک کند
   document.addEventListener("click", (e) => {
     if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
       suggestionsBox.style.display = "none";
     }
   });
 
-  // -------------------------
-  // API
-  // -------------------------
+  // -------------------- API --------------------
   const API_KEY = "101b33b46964ec28c577f761f37619fb";
   const BASE_URL = "https://api.themoviedb.org/3";
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
@@ -119,13 +109,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    // دریافت جزئیات فیلم
     const movieRes = await fetch(
       `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`
     );
     const movie = await movieRes.json();
-
-    // دریافت بازیگران و عوامل
+    //avamel film
     const creditsRes = await fetch(
       `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`
     );
@@ -139,7 +127,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
     const stars = credits.cast ? credits.cast.slice(0, 5) : [];
 
-    // پر کردن اطلاعات
     const posterEl = document.getElementById("movie-poster");
     if (posterEl) {
       posterEl.src = movie.poster_path
@@ -195,14 +182,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       starsEl.textContent =
         stars.length > 0 ? stars.map((s) => s.name).join(", ") : "N/A";
 
-    //دریافت سه تصویر
-    // دریافت تصاویر فیلم
+    //3 IMAGES OF CART MOVIE
     const imagesRes = await fetch(
       `${BASE_URL}/movie/${movieId}/images?api_key=${API_KEY}`
     );
     const imagesData = await imagesRes.json();
-
-    // اینجا کد شما برای اضافه کردن سه تصویر
     const images = imagesData.backdrops ? imagesData.backdrops.slice(0, 3) : [];
 
     const imagesContainer = document.getElementById("movie-images");
@@ -225,7 +209,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    // نمایش بازیگران
+    //CAST
     const castContainer = document.getElementById("movie-cast");
     if (castContainer) {
       castContainer.innerHTML = "";
