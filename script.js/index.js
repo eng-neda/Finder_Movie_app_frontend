@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let limit = 20;
 
     if (window.innerWidth <= 480) {
-      limit = 4;
+      limit = 3;
     } else if (window.innerWidth <= 768) {
       limit = 8;
     } else if (window.innerWidth <= 1024) {
