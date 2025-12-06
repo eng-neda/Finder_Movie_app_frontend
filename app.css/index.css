@@ -578,7 +578,7 @@ body {
   }
 
   /* MOVIE LIST */
-  .movie-items {
+  /* .movie-items {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 15px;
   }
@@ -600,15 +600,95 @@ body {
     width: 80px;
     height: 20px;
   }
+  ////// */
+  @media (max-width: 767px) {
+    .container {
+      width: 95%;
+    }
 
-  /* PAGINATION */
-  .page-btn {
-    font-size: 13px;
-    padding: 5px 8px;
-  }
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px 15px;
+      height: auto;
+      margin: 0;
+    }
 
-  .arrow-btn {
-    padding: 8px 10px;
+    .logo img {
+      width: 90px;
+    }
+
+    .search-box input {
+      height: 36px;
+      font-size: 13px;
+    }
+
+    .hamburger > ul > li > a.drop-btn {
+      font-size: 14px;
+      padding: 6px 12px;
+    }
+
+    .hamburger2 {
+      width: 100%;
+      left: 0;
+    }
+
+    .title {
+      margin: 20px 5px;
+    }
+
+    .title h2 {
+      font-size: 24px;
+    }
+
+    .movie-items {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      padding-top: 15px;
+    }
+
+    .movie-items li {
+      height: auto;
+    }
+
+    .photo {
+      height: 180px;
+    }
+
+    .movie-info {
+      padding: 6px 8px;
+      gap: 5px;
+    }
+
+    .movie-info h3 {
+      font-size: 14px;
+    }
+
+    .movie-info p {
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .rank .view-btn {
+      width: 70px;
+      height: 28px;
+      font-size: 12px;
+    }
+
+    .search-suggestions {
+      width: 100%;
+    }
+    /* PAGINATION */
+
+    .pagination {
+      gap: 4px;
+      margin: 15px 0;
+    }
+
+    .page-btn {
+      font-size: 14px;
+      padding: 5px 10px;
+    }
   }
 
   /* SUGGESTIONS BOX */
